@@ -921,6 +921,7 @@ function hangPicture(p){var s=VAULT_SLOTS[p.slot];if(!s)return;var tx=new THREE.
  var pic=new THREE.Mesh(new THREE.PlaneGeometry(s.w,s.h),new THREE.MeshBasicMaterial({map:tx}));pic.position.z=0.05;s.group.add(pic);
  var im=new Image();im.onload=function(){tx.image=im;tx.needsUpdate=true;var a=im.naturalWidth/im.naturalHeight,fw=s.w,fh=s.w/a;if(fh>s.h){fh=s.h;fw=s.h*a;}pic.scale.set(fw/s.w,fh/s.h,1);};im.src=p.src;
  s.group.updateMatrixWorld(true);var wp=new THREE.Vector3(0,0,0.15);s.group.localToWorld(wp);if(p.title)addIt({x:wp.x,y:wp.y,z:wp.z,title:p.title,text:p.text||'',rooms:['vault'],meshes:[pic],maxd:3.4});}
+VAULT_PICTURES.push({slot:1,src:COCKPIT_SRC,title:'Update erfolgreich',text:'The pilot at the controls, the boy beside her and the girl laughing: the whole crew in the cockpit the moment the update went through. It got the biggest frame in the middle of the back wall, where you see it the second the door swings open.'});
 VAULT_PICTURES.forEach(hangPicture);
 addIt({x:7.0,y:2.3,z:VZB+0.15,title:'Room for a lot more pictures',text:'The walls in here are bare on purpose. Every empty frame is waiting for the next picture, and there\'s plenty of wall left between them for more.',rooms:['vault'],meshes:[VAULT_SLOTS[1].back],maxd:4});
 function kpDraw(){var s='';for(var i=0;i<4;i++)s+=i<kpCode.length?'\u25CF ':'\u25CB ';$('kpDots').textContent=s.trim();}
