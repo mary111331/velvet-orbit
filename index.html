@@ -84,7 +84,7 @@ nav.shelf .tb.on{background:var(--ink);color:#111;border-color:var(--ink)}
 <script>(function(){var c=document.createElement("canvas");c.width=c.height=160;var g=c.getContext("2d"),d=g.createImageData(160,160);for(var i=0;i<d.data.length;i+=4){var v=Math.random()*255|0;d.data[i]=d.data[i+1]=d.data[i+2]=v;d.data[i+3]=255;}g.putImageData(d,0,0);document.getElementById("grain").style.backgroundImage="url("+c.toDataURL()+")";})();</script>
 <div id="hud" class="hide">
   <div id="where"></div>
-  <div id="tbtns"><button class="tb" id="bPlaces" type="button">Places</button><button class="tb" id="bBed" type="button">Bedtime</button><button class="tb" id="bNight" type="button">Night scene</button><button class="tb" id="bHeist" type="button">Heist scene</button><button class="tb" id="bStory" type="button">Their story</button><button class="tb" id="bSound" type="button">Sound off</button><span class="tb mus"><button id="bMus" type="button">Music: on</button><input id="mVol" type="range" min="0" max="100" value="20" aria-label="Music volume"></span><button class="tb" id="bHelp" type="button">Help</button></div>
+  <div id="tbtns"><button class="tb" id="bPlaces" type="button">Places</button><button class="tb" id="bComb" type="button">Hair combing</button><button class="tb" id="bBed" type="button">Bedtime</button><button class="tb" id="bNight" type="button">Night scene</button><button class="tb" id="bHeist" type="button">Heist scene</button><button class="tb" id="bStory" type="button">Their story</button><button class="tb" id="bSound" type="button">Sound off</button><span class="tb mus"><button id="bMus" type="button">Music: on</button><input id="mVol" type="range" min="0" max="100" value="20" aria-label="Music volume"></span><button class="tb" id="bHelp" type="button">Help</button></div>
   <div id="cross"></div>
   <div id="cap"><p></p></div>
   <button id="prompt" class="hide" type="button"></button>
@@ -536,7 +536,7 @@ var famTex=cvs(320,240,function(g,w,h){g.fillStyle='#3a2a1e';g.fillRect(0,0,w,h)
  g.fillStyle='#fff';for(var i=0;i<30;i++)g.fillRect(28+(i*53)%(w-56),28+(i*29)%60,2,2);g.fillStyle='#3e78c0';g.beginPath();g.ellipse(250,120,46,34,0,0,7);g.fill();g.fillStyle='#9fd4ff';g.fillRect(232,108,30,12);
  function fig(x,top,hgt,c,hair){g.fillStyle=c;g.fillRect(x-14,top+24,28,hgt-24);g.fillStyle='#e8c4a0';g.beginPath();g.arc(x,top+12,12,0,7);g.fill();g.fillStyle=hair;g.beginPath();g.arc(x,top+8,12,Math.PI,0);g.fill();}
  fig(80,82,130,'#2a2a30','#2a1a12');fig(124,90,122,'#5a2030','#3a2014');fig(160,138,74,'#8a8a90','#c8c8cc');g.fillStyle='#d8a8ff';g.beginPath();g.arc(160,182,9,0,7);g.fill();
- g.fillStyle='#8a6a4a';g.fillRect(186,150,26,36);g.fillStyle='#b0b6be';g.fillRect(190,128,18,22);g.fillStyle='#7fe0ff';g.fillRect(193,134,4,4);g.fillRect(201,134,4,4);g.fillStyle='#c0662a';g.fillRect(190,122,18,7);
+ g.fillStyle='#8c8c86';g.fillRect(186,150,26,36);g.fillStyle='#a8562a';g.fillRect(188,156,9,8);g.fillRect(203,170,7,10);g.fillStyle='#5a8a88';g.fillRect(196,174,5,5);g.fillStyle='#9a9a94';g.fillRect(190,128,18,22);g.fillStyle='#a8562a';g.fillRect(203,130,4,6);g.fillStyle='#7fe0ff';g.fillRect(193,134,4,4);g.fillRect(201,134,4,4);g.fillStyle='#6a6a66';g.fillRect(198,114,2,14);g.fillStyle='#ff5a5a';g.beginPath();g.arc(199,113,3,0,7);g.fill();
  g.fillStyle='#f3eadb';g.font='italic 16px Georgia,serif';g.textAlign='center';g.fillText('us',w/2,h-26);});
 /* the crayon picture moved to the side wall by the counter, a little crooked */
 var famPic=plane(0.6,0.453,famTex,{lit:true});add(famPic,2.1,1.62,-5.0);famPic.rotation.set(0,Math.PI/2,0.03);var famFr=blk(2.07,2.095,1.36,1.88,-5.33,-4.67,0x3a2a1e);famFr.rotation.x=0.03;
@@ -678,7 +678,7 @@ addIt({x:-3.5,y:0.5,z:-8.2,title:'Zip\'s patched blanket',text:'Grey, like his p
 blk(-2.42,-2.08,0,0.8,-10.7,-9.0,wood);blk(-2.44,-2.06,0.8,0.83,-10.72,-8.98,mat(0xd8d0c2));solid(-2.44,-2.06,-10.72,-8.98);
 var brushSh=new THREE.Group();var bh1=box(0.05,0.03,0.2,0x8a5a3a);brushSh.add(bh1);var bh2=box(0.08,0.035,0.1,0x6a3a22);bh2.position.z=0.12;brushSh.add(bh2);brushSh.position.set(-2.25,0.85,-9.6);scene.add(brushSh);
 for(var rb=0;rb<3;rb++)add(box(0.03,0.006,0.18,[0xd8a8ff,0xd03a2a,0xe8b030][rb]),-2.32+rb*0.06,0.836,-9.25);
-addIt({x:-2.25,y:0.86,z:-9.6,title:'The hairbrush',text:'Mary brushes Zip\'s hair every evening at check-in, the wild copper mop that goes in every direction at once. He holds very still and pretends he doesn\'t like it. His fan always gets quieter.',rooms:['kids'],meshes:[brushSh],maxd:2.6,sy:0.12});
+addIt({x:-2.25,y:0.86,z:-9.6,title:'The hairbrush',text:'The hairbrush and Gray\'s ribbons. Every evening at check-in Mary sits on the edge of the family bed and combs Gray\'s silver hair, slow and careful, all the way down. Gray holds very still and says she doesn\'t mind it. Her sphere always glows a little brighter. Zip has no hair to comb, so Mary gives his antenna a polish instead.',rooms:['kids'],meshes:[brushSh],maxd:2.6,sy:0.12});
 /* night light, toys and a star map */
 var nl=add(sph(0.08,mat(0xffd8a0,{basic:true}),12),-7.75,0.3,-7.3);var nightL=plight(0xffc890,0.5,4.5,-7.3,0.6,-7.6);
 var starMap=plane(1.6,1.0,cvs(320,200,function(g,w,h){g.fillStyle='#101a34';g.fillRect(0,0,w,h);g.fillStyle='#ffffff';for(var i=0;i<90;i++){g.globalAlpha=0.4+rnd()*0.6;g.fillRect(rnd()*w,rnd()*h,2,2);}g.globalAlpha=1;g.strokeStyle='#ffe08a';g.lineWidth=1.5;g.beginPath();g.moveTo(60,60);g.lineTo(110,90);g.lineTo(160,70);g.lineTo(210,110);g.stroke();g.fillStyle='#ffe08a';g.font='16px Georgia,serif';g.fillText('Gray',110,130);g.fillStyle='#7fd8ff';g.fillText('Zip',220,150);}),{lit:true});
@@ -736,6 +736,32 @@ var BODY={
  m:[[0,-0.05],[0.8,-0.05],[0.86,0.1],[0.8,0.34],[0.88,0.58],[0.97,0.8],[0.92,0.93],[0.58,1.0],[0.3,1.03],[0,1.03]],
  f:[[0,-0.05],[0.9,-0.05],[0.95,0.08],[0.66,0.4],[0.84,0.62],[0.88,0.78],[0.8,0.92],[0.5,1.0],[0.28,1.03],[0,1.03]],
  k:[[0,-0.05],[0.86,-0.05],[0.9,0.1],[0.84,0.42],[0.88,0.66],[0.88,0.82],[0.78,0.94],[0.45,1.0],[0.26,1.03],[0,1.03]]};
+/* Zip's old metal: weathered steel with rust patches, rust drips, dents, scratches, rivets and a few chips of faded teal paint */
+var ZRUST=(function(){
+ function RNG(seed){var s=seed;return function(){s=(s*16807)%2147483647;return (s-1)/2147483646;};}
+ function make(seed,w,h,opt){var r=RNG(seed);var clr=opt.clear;
+  function cx0(){var x=r();if(clr&&x>clr[0]&&x<clr[1])x=(x+0.5)%1;return x*w;}
+  var t=cvs(w,h,function(g,W,H){
+   var gr=g.createLinearGradient(0,0,0,H);gr.addColorStop(0,'#a2a39e');gr.addColorStop(1,'#8a8b85');g.fillStyle=gr;g.fillRect(0,0,W,H);
+   for(var i=0;i<W*H/40;i++){var v=118+(r()*60|0);g.fillStyle='rgba('+v+','+v+','+(v-5)+',0.3)';g.fillRect(r()*W,r()*H,1+r()*3,1);}
+   (opt.paint||[]).forEach(function(p){g.fillStyle=p[4]||'rgba(84,142,140,0.6)';g.beginPath();var px=p[0]*W,py=p[1]*H,rx=p[2]*W,ry=p[3]*H;for(var k=0;k<16;k++){var a=k/16*Math.PI*2,rr=0.65+r()*0.5;g.lineTo(px+Math.cos(a)*rx*rr,py+Math.sin(a)*ry*rr);}g.closePath();g.fill();});
+   (opt.seams||[]).forEach(function(y){g.fillStyle='rgba(44,40,36,0.6)';g.fillRect(0,y*H,W,2);g.fillStyle='rgba(215,215,208,0.3)';g.fillRect(0,y*H+2,W,1);});
+   var cols=['140,70,30','164,86,38','112,56,26','180,100,46'];
+   for(var i=0;i<(opt.patches||8);i++){var px=cx0(),py=r()*H,rad=(0.05+r()*0.11)*Math.min(W,H*2);var c=cols[i%4];var rg=g.createRadialGradient(px,py,1,px,py,rad);rg.addColorStop(0,'rgba('+c+',0.95)');rg.addColorStop(0.55,'rgba('+c+',0.65)');rg.addColorStop(1,'rgba('+c+',0)');g.fillStyle=rg;g.beginPath();g.ellipse(px,py,rad,rad*(0.55+r()*0.5),r()*3,0,7);g.fill();
+    for(var k=0;k<36;k++){g.fillStyle='rgba(72,36,16,'+(0.3+r()*0.5).toFixed(2)+')';var a=r()*7,d=r()*rad*0.8;g.fillRect(px+Math.cos(a)*d,py+Math.sin(a)*d,1+r()*2,1+r()*2);}}
+   for(var i=0;i<(opt.streaks||8);i++){var x=cx0(),y0=r()*H*0.6,len=(0.15+r()*0.35)*H;var lg=g.createLinearGradient(0,y0,0,y0+len);lg.addColorStop(0,'rgba(146,74,30,0.8)');lg.addColorStop(1,'rgba(146,74,30,0)');g.fillStyle=lg;g.fillRect(x,y0,1.5+r()*3,len);}
+   for(var i=0;i<(opt.dents||2);i++){var px=cx0(),py=(0.2+r()*0.6)*H,rad=(0.035+r()*0.04)*W;g.fillStyle='rgba(40,40,38,0.35)';g.beginPath();g.ellipse(px,py,rad,rad*0.7,0,0,7);g.fill();g.fillStyle='rgba(230,230,224,0.35)';g.beginPath();g.ellipse(px-rad*0.25,py-rad*0.25,rad*0.6,rad*0.4,0,0,7);g.fill();g.fillStyle='rgba(56,56,54,0.4)';g.beginPath();g.ellipse(px+rad*0.2,py+rad*0.2,rad*0.5,rad*0.3,0,0,7);g.fill();}
+   g.strokeStyle='rgba(232,232,226,0.35)';g.lineWidth=1;for(var i=0;i<12;i++){var x=r()*W,y=r()*H;g.beginPath();g.moveTo(x,y);g.lineTo(x+(r()-0.5)*W*0.16,y+(r()-0.5)*H*0.06);g.stroke();}
+   (opt.rivets||[]).forEach(function(y){for(var x=6;x<W;x+=(opt.rivGap||22)){g.fillStyle='rgba(40,38,36,0.6)';g.beginPath();g.arc(x+1,y*H+1,2.6,0,7);g.fill();g.fillStyle='#c2c2bc';g.beginPath();g.arc(x,y*H,2.3,0,7);g.fill();}});
+  });
+  var m=new THREE.MeshLambertMaterial({map:t});m.userData.noGrime=true;return m;}
+ return {
+  body:make(11,256,256,{paint:[[0.6,0.45,0.13,0.17],[0.1,0.6,0.07,0.08]],seams:[0.3,0.72],rivets:[0.27,0.76],patches:15,streaks:16,dents:3}),
+  limb:make(13,128,128,{patches:9,streaks:7,dents:2,paint:[[0.7,0.55,0.12,0.12,'rgba(84,142,140,0.55)']]}),
+  head:make(5,256,128,{paint:[[0.62,0.3,0.1,0.18]],patches:9,streaks:7,dents:2,rivets:[0.2],rivGap:16,clear:[0.1,0.42]})
+ };
+})();
+
 var zipTee=(function(){var t=cvs(64,64,function(g,w,h){for(var i=0;i<8;i++){g.fillStyle=i%2?'#3f6f80':'#c9a45a';g.fillRect(0,i*8,w,8);}});t.wrapS=t.wrapT=THREE.RepeatWrapping;t.repeat.set(1,1.4);var m=new THREE.MeshLambertMaterial({map:t});m.userData.noGrime=true;return m;})();
 function person(o){var g=new THREE.Group(),P={g:g,legs:[],arms:[],elbows:[],hy:0,skirts:[]};g.rotation.order='YXZ';
  if(o.leather&&o.coat)PLEATHER[o.coat]=true;var hipY=o.leg,tl=o.leg*0.5,sl=o.leg*0.5,lw=o.lw,R=o.tw/2,zs=o.td/o.tw,hr=o.hr;var legC=o.legCol||o.pants;
@@ -806,6 +832,21 @@ function person(o){var g=new THREE.Group(),P={g:g,legs:[],arms:[],elbows:[],hy:0
    var len=hr*(0.45+rnd()*0.55),cn=pmesh(new THREE.ConeGeometry(hr*(0.14+rnd()*0.1),len,12,2),i%3?cA:cB);cn.quaternion.setFromUnitVectors(upV,dir);cn.position.copy(dir).multiplyScalar(hr*0.92+len*0.32);tg.add(cn);}
   hz.add(tg);P.tuft=tg;
   var ant=pmesh(pcyl(0.007,0.007,hr*0.7,5),0x9aa0a6);ant.position.set(-hr*0.62,hr*1.12,-hr*0.1);ant.rotation.z=0.35;hz.add(ant);var ab=new THREE.Mesh(psph(0.026,8,6),new THREE.MeshBasicMaterial({color:0xff5a5a}));ab.position.set(-hr*0.76,hr*1.45,-hr*0.1);hz.add(ab);P.antBulb=ab;}
+ if(o.rusty){/* Zip: no hair at all, just one small antenna on his old metal head, plus rivets, bolts, a chest hatch and the fan grille on his back */
+  var anb=pmesh(pcyl(hr*0.17,hr*0.22,hr*0.1,10),0x55524c);anb.position.set(0,hr*1.02,0);hz.add(anb);
+  var ant=pmesh(pcyl(0.006,0.008,hr*0.6,6),0x8e8c86);ant.position.set(hr*0.03,hr*1.36,0);ant.rotation.z=-0.1;hz.add(ant);
+  var ab=new THREE.Mesh(psph(0.022,8,6),new THREE.MeshBasicMaterial({color:0xff5a5a}));ab.position.set(hr*0.06,hr*1.67,0);hz.add(ab);P.antBulb=ab;
+  for(var ri=0;ri<12;ri++){var ra=ri/12*Math.PI*2;if(Math.abs(Math.sin(ra))<0.3&&Math.cos(ra)>0)continue;var rv=pmesh(psph(hr*0.055,6,4),0xb4b2aa);rv.position.set(Math.sin(ra)*hr*0.79,hr*0.62,Math.cos(ra)*hr*0.79);hz.add(rv);}
+  var zR=o.tw*0.5,zZ=o.td/o.tw;
+  var hatch=pmesh(pbox(zR*0.78,o.th*0.36,0.014),0x7e7a70);hatch.position.set(0,o.th*0.52,zR*zZ*0.9);hatch.rotation.z=0.04;up.add(hatch);
+  var hrust=pmesh(pbox(zR*0.3,o.th*0.12,0.004),0x9a5428);hrust.position.set(zR*0.18,o.th*0.44,zR*zZ*0.9+0.009);up.add(hrust);
+  var dent=pmesh(psph(zR*0.11,8,6),0x5e5a54);dent.scale.set(1,0.7,0.25);dent.position.set(-zR*0.17,o.th*0.58,zR*zZ*0.9+0.006);up.add(dent);
+  [[-1,1],[1,1],[-1,-1],[1,-1]].forEach(function(q){var bt=pmesh(psph(0.011,6,4),0xc8c6be);bt.position.set(q[0]*zR*0.33,o.th*0.52+q[1]*o.th*0.14,zR*zZ*0.9+0.009);up.add(bt);});
+  var gr=pmesh(pcyl(zR*0.36,zR*0.36,0.012,14),0x3a3632);gr.rotation.x=Math.PI/2;gr.position.set(0,o.th*0.55,-zR*zZ*0.9);up.add(gr);
+  for(var gi=-2;gi<=2;gi++){var sl=pmesh(pbox(zR*0.56,0.008,0.006),0x8a8880);sl.position.set(0,o.th*0.55+gi*zR*0.12,-zR*zZ*0.9-0.008);up.add(sl);}
+  [-1,1].forEach(function(sx){var hb=pmesh(psph(0.016,6,4),0xb4b2aa);hb.position.set(sx*zR*0.92,o.th*0.12,0);up.add(hb);});
+ }
+
  /* arms: shoulder, tapered upper arm, an elbow, forearm, a mitten of a hand with a thumb */
  [-1,1].forEach(function(s,k){var shg=new THREE.Group();shg.position.set(s*(o.tw/2+o.aw/2)*0.97,neckY-0.035,0);shg.rotation.order='YXZ';var metal=k===1&&o.metalArm;
   var ucol=metal?0xb8c0c8:(o.coat||o.sleeve||o.top),fcol=metal?0xb8c0c8:(o.forearm||o.coat||o.sleeve||o.top),hcol=metal?0xc8ced6:(o.handCol||o.skin);
@@ -828,13 +869,21 @@ var MILES=person({persona:'miles',body:'m',leg:0.95,tw:0.46,th:0.62,td:0.26,hr:0
 var MARY=person({persona:'mary',body:'f',leg:0.86,tw:0.4,th:0.56,td:0.23,hr:0.125,lw:0.11,aw:0.09,al:0.58,top:0x2e2a31,cardigan:0x121014,sleeve:0x121014,pants:0x253c60,skin:0xecc4a2,hair:0x22130c,style:'mary',lips:0x9a2630,jawW:0.9,browTilt:0.14,eyeR:0.105,shoe:0x0a0a0c,heels:true,posture:[-0.03,0],cad:1});
 /* Gray: a careful, curious cyborg girl, silver hair, a soft glow at her temple and down her metal arm */
 var GRAY=person({persona:'gray',body:'k',leg:0.55,tw:0.3,th:0.38,td:0.18,hr:0.12,lw:0.085,aw:0.07,al:0.38,top:0x8c88a2,pants:0x4a4e5a,skin:0xecc8aa,hair:0xc8ccd4,style:'gray',tunic:true,metalArm:true,core:true,glow:0x9fe0ff,eyeR:0.12,browTilt:0.12,shoe:0xb890e0,posture:[0.04,0],cad:0.78});
-/* Zip: a chaos boy built from spare parts, a wild copper mop, striped tee, patched overalls, never still */
-var ZIP=person({persona:'zip',body:'k',leg:0.36,tw:0.36,th:0.32,td:0.26,hr:0.135,lw:0.09,aw:0.07,al:0.3,top:0xc9a45a,teeMat:zipTee,pants:0x3c5a7a,bib:true,patch:0x9a2a2a,shin:0x9aa0a8,kneeCol:0x7a8088,forearm:0x9aa0a8,handCol:0xb8bec6,skin:0xd6cfc4,neckCol:0x9aa0a8,robot:true,tuft:0xc0662a,tuft2:0x9a4a1e,shoe:0xa8322e,sole:0xe8e2d8,posture:[0,0],cad:0.86});
+/* Zip: an old rusty android kid built from spare parts: bare weathered metal, rust patches and streaks, dents, bolts and joints, one small antenna, never still */
+var ZIP=person({persona:'zip',body:'k',leg:0.36,tw:0.36,th:0.32,td:0.26,hr:0.135,lw:0.09,aw:0.07,al:0.3,top:0x8a8478,teeMat:ZRUST.body,pants:ZRUST.limb,pelvis:ZRUST.limb,shin:ZRUST.limb,kneeCol:0x55524c,forearm:ZRUST.limb,handCol:0x7c7a72,skin:ZRUST.head,neckCol:0x5a5650,robot:true,rusty:true,shoe:0x5c5048,sole:0x3a3632,posture:[0,0],cad:0.86});
 /* Gray's sphere and Mary's brush */
 var orb=sph(0.07,mat(0xd8a8ff,{basic:true}),14);GRAY.hand0.add(orb);orb.position.set(0,-0.06,0.04);
 var orbGlow=new THREE.Sprite(new THREE.SpriteMaterial({map:sparkTex,color:0xd8a8ff,transparent:true,depthWrite:false,opacity:0.6}));orbGlow.scale.set(0.35,0.35,1);orb.add(orbGlow);
 var orbL=new THREE.PointLight(0xd8a8ff,0.0,3,2);orb.add(orbL);
-var handBrush=new THREE.Group();var hb1=box(0.04,0.025,0.16,0x8a5a3a);handBrush.add(hb1);var hb2=box(0.07,0.03,0.09,0x6a3a22);hb2.position.z=0.11;handBrush.add(hb2);handBrush.position.set(0,-0.03,0.06);handBrush.visible=false;MARY.hand0.add(handBrush);
+var handBrush=new THREE.Group();/* Mary's comb: tortoiseshell, a short handle in her hand and the teeth facing the hair */
+var hb1=box(0.02,0.013,0.08,0x6e3a20);hb1.position.z=-0.02;handBrush.add(hb1);var hb2=box(0.022,0.016,0.13,0x7e4426);hb2.position.z=-0.125;handBrush.add(hb2);
+for(var hbi=0;hbi<11;hbi++){var hbt=box(0.007,0.032,0.006,0x8a4c2c);hbt.position.set(0,0.022,-0.068-hbi*0.0115);handBrush.add(hbt);}
+var hbTip=new THREE.Object3D();hbTip.position.set(0,0.03,-0.17);handBrush.add(hbTip);handBrush.userData.tip=hbTip;
+handBrush.position.set(0,-0.035,0);
+var COMB_ON=[[-0.5,0.25,-2.04,0],[-0.5,0.35,-1.24,-1.28],[-0.25,0.35,-1.28,-1.28],[0,0.35,-1.36,-1.2],[0,0.35,-1.28,-1.28],[0,0.35,-1.24,-1.28]];
+var COMB_UP=[[-0.5,0.25,-1.72,-0.64],[-0.5,0.35,-1.24,-1.36],[-0.25,0.35,-1.24,-1.44],[0.25,0.35,-1.48,-1.12],[0.25,0.35,-1.36,-1.28],[0.5,0.35,-1.48,-0.96]];
+function combPose(s,w){function at(A){var f=Math.max(0,Math.min(1,s))*(A.length-1),i=Math.min(A.length-2,Math.floor(f)),u=f-i;return A[i].map(function(x,j){return x+(A[i+1][j]-x)*u;});}var a=at(COMB_ON),b=at(COMB_UP);return a.map(function(x,j){return x+(b[j]-x)*w;});}
+handBrush.visible=false;MARY.hand0.add(handBrush);
 /* bread knife in Miles's hand */
 var knife=box(0.015,0.02,0.22,0xc8ccd0);knife.position.set(0,-0.02,0.1);MILES.hand0.add(knife);
 /* name tags, shown when you are close */
@@ -955,14 +1004,14 @@ var LOOP=[[-5.1,-4.7],[-1.2,-4.9],[1.0,-3.6],[2.9,-3.6],[3.3,-4.55],[6.05,-4.4],
 /* the children run about a third slower than they used to, so you can follow them; Zip is still the livelier one */
 var KSPD=2.1*0.62,ZSPD=2.1*0.7,loopLen=plen(LOOP),LAP=loopLen/KSPD;
 function laps(tr,n,spd){for(var i=0;i<n;i++)tr.move(LOOP,spd||KSPD,'run');return tr;}
-var TO_BED=[[-5.1,-4.7],[-5.0,-5.6],[-5.0,-6.6]];
+var TO_BED=[[-5.1,-4.7],[-5.0,-5.6],[-5.0,-6.6]];var GCOMB=[-5.0,-7.18];var COMBVIEW=[-3.7,-6.5,-0.18];function plen(a){var d=0;for(var i=1;i<a.length;i++)d+=Math.hypot(a[i][0]-a[i-1][0],a[i][1]-a[i-1][1]);return d;}
 var C0=Math.ceil(3*LAP+6.5),C1=C0+22;
 var MARY_PATH=[[5.5,-2.65],[5.95,-1.55],[3.2,-1.4],[2.9,-2.4],[1.0,-2.6],[-4.9,-5.2],[-5.0,-6.6],[-5.0,-7.8]];
 var mWalk=plen(MARY_PATH)/1.15;
 var PI=Math.PI,MSPOT=[TX,TZ-0.82],MSEAT=[5.5,-2.65];
-var tGray=new Track();laps(tGray,3);tGray.move(TO_BED.concat([[-5.6,-7.3],[-6.0,-8.3]]),1.4,'walk').hold(C1,-6.0,-8.3,0.7,'kneel',0.4).move([[-6.0,-8.3],[-5.6,-7.3],[-5.0,-6.6],[-5.0,-5.6],[-5.1,-4.7]],1.3,'run');laps(tGray,2);
+var tGray=new Track();laps(tGray,3);tGray.move(TO_BED.concat([[GCOMB[0],GCOMB[1]]]),1.4,'walk').hold(C1+(plen([[-6.0,-8.3],[-5.6,-7.3],[-5.0,-6.6],[-5.0,-5.6],[-5.1,-4.7]])-plen([GCOMB,[-5.0,-6.6],[-5.0,-5.6],[-5.1,-4.7]]))/1.3,GCOMB[0],GCOMB[1],0,'stand').move([GCOMB,[-5.0,-6.6],[-5.0,-5.6],[-5.1,-4.7]],1.3,'run');laps(tGray,2);
 var N0=tGray.t; /* bedtime */
-var tZip=new Track();tZip.hold(1.1,-5.1,-4.7,PI/2,'stand');laps(tZip,3,ZSPD);tZip.move(TO_BED.concat([[-5.0,-7.1]]),1.3,'walk').hold(C1,-5.0,-7.1,0,'stand').move([[-5.0,-7.1],[-5.0,-6.6],[-5.0,-5.6],[-5.1,-4.7]],1.5,'run');laps(tZip,2,ZSPD);
+var tZip=new Track();tZip.hold(1.1,-5.1,-4.7,PI/2,'stand');laps(tZip,3,ZSPD);tZip.move(TO_BED.concat([[-5.6,-7.3],[-6.0,-8.3]]),1.3,'walk').hold(C1-(plen([[-6.0,-8.3],[-5.6,-7.3],[-5.0,-6.6],[-5.0,-5.6],[-5.1,-4.7]])-plen([[-5.0,-7.1],[-5.0,-6.6],[-5.0,-5.6],[-5.1,-4.7]]))/1.5,-6.0,-8.3,0.7,'kneel',0.4).move([[-6.0,-8.3],[-5.6,-7.3],[-5.0,-6.6],[-5.0,-5.6],[-5.1,-4.7]],1.5,'run');laps(tZip,2,ZSPD);
 var tMary=new Track();tMary.hold(C0-mWalk-0.5,MSEAT[0],MSEAT[1],-PI/2,'sit',0.47,'butter').move(MARY_PATH,1.15).hold(C1+0.6,-5.0,-7.8,0,'sit',0.42).move(MARY_PATH.slice().reverse(),1.15);
 
 /* Miles by day: bread, the pot on the stove, the dishes, plates to the table, round again */
@@ -1079,8 +1128,8 @@ var LINES=[
  [4,GRAY,'Gray','You can NOT hear bread!'],[6.5,ZIP,'Zip','I CAN hear bread!'],[10,MILES,'Miles','Plates, Gray. Slowly this time.'],[14,MARY,'Mary','Corners, Zip. I know, I know.'],
  [22,ZIP,'Zip','Mommy, look! I\'m faster than Gray!'],[25,GRAY,'Gray','Mommy, look! He\'s cheating!'],[30,MILES,'Miles','No running near the bread.'],
  [C0-mWalk,MARY,'Mary','Check-in time, you two. Bedroom.'],
- [C0+0.5,MARY,'Mary','Okay. Hair first, mister.'],[C0+2.5,ZIP,'Zip','Mommy, look! I\'m holding very still.'],[C0+6,GRAY,'Gray','Mommy, look!'],[C0+8,MARY,'Mary','I see it, sweetheart. It\'s the brightest it\'s ever been.'],
- [C0+11.5,ZIP,'Zip','Mommy, look, my fan went quiet.'],[C0+14,MARY,'Mary','That\'s because you like this.'],[C0+16,ZIP,'Zip','I do not.'],[C0+18.5,GRAY,'Gray','Mommy, look! He\'s smiling!'],
+ [C0+0.5,MARY,'Mary','Okay. Hair first, sweetheart. Sit still for me.'],[C0+2.5,GRAY,'Gray','Mommy, look! I\'m holding very still.'],[C0+6,ZIP,'Zip','Mommy, look! My antenna\'s blinking!'],[C0+8,MARY,'Mary','I see it, my little rusty one. Brightest it\'s ever been.'],
+ [C0+11.5,GRAY,'Gray','Mommy, look, my sphere is glowing.'],[C0+14,MARY,'Mary','That\'s because you like this.'],[C0+16,GRAY,'Gray','Maybe a little.'],[C0+18.5,ZIP,'Zip','Mommy, look! She\'s smiling!'],
  [C1+1,MARY,'Mary','All done. Go on, five more minutes.'],[C1+8,GRAY,'Gray','Mommy, look! Zip, wait for me!'],
  /* bedtime */
  [N0+0.3,MILES,'Miles','Bedtime, Velvet Orbit. Crew meeting\'s over.'],[N0+2.8,ZIP,'Zip','Five more minutes?'],[N0+5.4,MARY,'Mary','That was the five more minutes.'],
@@ -1186,16 +1235,20 @@ function updateFamily(T,dt){var t=T%CYCLE;dt=dt||0.016;secretTick(dt);
  var inCheck=t>=C0-0.5&&t<=C1+0.5;
  actP(MILES,sl,T,t,MARY,dt);actP(MARY,sm,T,t,MILES,dt);
  knife.visible=sl.act==='cut';plateCarry.visible=sl.act==='carry'||(sl.act==='place'&&sl.since<0.8);
- /* check-in: Mary brushes Zip's hair on the edge of the family bed */
+ /* check-in: Mary sits on the edge of the family bed and combs Gray's hair. The comb runs from the crown down the back of her head
+    (beside the little bun), lifts off, and comes back to the top for the next stroke. COMB_ON / COMB_UP are measured arm poses:
+    [comb tilt in the hand, arm sideways, arm forward, elbow] along the stroke, with the teeth in the hair / lifted just clear of it. */
  handBrush.visible=inCheck&&sm.pose==='sit';
- if(handBrush.visible){var br=Math.sin(T*3.0);MARY.arms[0].rotation.x=-1.75+br*0.32;MARY.arms[0].rotation.z=0.1;MARY.arms[1].rotation.x=-1.25;MARY.arms[1].rotation.z=-0.35;MARY.head.rotation.x=0.35;
-  ZIP.head.rotation.x=-0.12+br*0.04;if(ZIP.tuft){ZIP.tuft.rotation.x=br*0.18;ZIP.tuft.rotation.z=Math.cos(T*3.0)*0.06;}}
- else if(ZIP.tuft){ZIP.tuft.rotation.x=sz.moving?-0.25:Math.sin(T*2)*0.05;ZIP.tuft.rotation.z=0;}
+ if(handBrush.visible){var cyc=(T%2.7)/2.7,cs,cw;if(cyc<0.68){var cu=cyc/0.68;cs=cu*cu*(3-2*cu);cw=0;}else{var cu2=(cyc-0.68)/0.32;cs=1-cu2*cu2*(3-2*cu2);cw=Math.sin(Math.PI*cu2);}
+  var cq=combPose(cs,cw);handBrush.rotation.x=cq[0];MARY.arms[0].rotation.set(cq[2],0,cq[1]);MARY.elbows[0].rotation.set(cq[3],0,0);
+  MARY.arms[1].rotation.x=-1.25;MARY.arms[1].rotation.z=-0.35;MARY.head.rotation.x=0.35;
+  if(sg.pose==='stand'&&!sg.moving){var tug=cw>0?0:Math.sin(Math.PI*cs)*0.05;GRAY.head.rotation.set(-0.08-tug,0,0);if(GRAY.headIn)GRAY.headIn.rotation.set(0,0,Math.sin(T*0.5)*0.03);}}
+ else handBrush.rotation.x=0;
  /* the kids shout 'Mommy, look!': Gray lifts her sphere, Zip waves */
  var look=-1;for(var i=0;i<LINES.length;i++){if(/Mommy, look/.test(LINES[i][3])&&t>=LINES[i][0]&&t<LINES[i][0]+2.6){look=i;}}
  var gSleep=sg.pose==='lie',zSleep=sz.pose==='lie';
  var orbBright=gSleep?0.12+0.05*Math.sin(T*0.8):0.35+Math.sin(T*2)*0.1;
- if(look>=0){var who=LINES[look][1];if(who===GRAY&&!gSleep){GRAY.arms[0].rotation.x=-2.6;orbBright=1.3+Math.sin(T*9)*0.2;}else if(who===ZIP&&!zSleep){ZIP.arms[0].rotation.x=-2.7+Math.sin(T*10)*0.3;ZIP.arms[1].rotation.x=-2.7-Math.sin(T*10)*0.3;if(!sz.moving)ZIP.head.rotation.y=Math.sin(T*4)*0.25;}}
+ if(look>=0){var who=LINES[look][1];if(who===GRAY&&!gSleep){GRAY.arms[0].rotation.x=(handBrush.visible&&sg.pose==='stand')?-1.45:-2.6;orbBright=1.3+Math.sin(T*9)*0.2;}else if(who===ZIP&&!zSleep){ZIP.arms[0].rotation.x=-2.7+Math.sin(T*10)*0.3;ZIP.arms[1].rotation.x=-2.7-Math.sin(T*10)*0.3;if(!sz.moving)ZIP.head.rotation.y=Math.sin(T*4)*0.25;}}
  if(sg.pose==='kneel'&&look<0){GRAY.arms[0].rotation.x=-1.0;GRAY.arms[1].rotation.x=-0.8;}
  else if(sg.pose!=='kneel'&&!gSleep&&look<0&&!sg.moving){GRAY.arms[0].rotation.x=-0.6;}
  if(t>=N0+7.6&&t<N0+9.8&&!gSleep){GRAY.arms[1].rotation.x=-2.6+Math.sin(T*9)*0.3;}
@@ -1225,9 +1278,9 @@ function updateFamily(T,dt){var t=T%CYCLE;dt=dt||0.016;secretTick(dt);
 }
 function famAct(P,name,lines){addIt({x:0,y:0,z:0,title:name,text:lines,meshes:[P.g],maxd:3.2,dyn:P,sy:0});}
 famAct(MILES,'Miles','A card player nobody could read. In the evening he cuts the bread into four exact pieces, minds the pot and does the dishes. After bedtime he makes the coffee, takes it out to the balcony with Mary, and plans the next Velvet Orbit job on the couch, with red string.');
-famAct(MARY,'Mary','Reads people for a living and draws everything she sees. At check-in she brushes Zip\'s wild copper hair while Gray shows her the sphere. Once the kids are asleep she is the lookout, the planner and the one who says the coffee is burnt.');
-famAct(GRAY,'Gray','Found in a steel case marked OPTICAL EQUIPMENT. She runs everywhere except when she is carrying plates. Her sphere glows brighter when she is happy, and goes down low when she sleeps.');
-famAct(ZIP,'Zip','Found behind a yellow door, keeping watch in the dark. Small, patched, with a wild mop of copper hair he pretends not to care about. He can hear bread. At night his fan goes quiet.');
+famAct(MARY,'Mary','Reads people for a living and draws everything she sees. At check-in she sits on the edge of the family bed and combs Gray\'s silver hair, slow and careful, while Zip blinks his antenna at them. Once the kids are asleep she is the lookout, the planner and the one who says the coffee is burnt.');
+famAct(GRAY,'Gray','Found in a steel case marked OPTICAL EQUIPMENT. At check-in she stands in front of Mary and holds very still while Mary combs her hair. She runs everywhere except when she is carrying plates. Her sphere glows brighter when she is happy, and goes down low when she sleeps.');
+famAct(ZIP,'Zip','Found behind a yellow door, keeping watch in the dark. An old android kid, bare metal all over: rust patches and streaks, a few dents, bolts at every joint and one small antenna with a red light on top. Somebody painted him teal once, and a few chips of it are left. He can hear bread. At night his fan goes quiet.');
 /* ---------- rooms, places, captions, cards ---------- */
 function roomAt(x,z){if(z<-6.05&&x>2.5)return 'vault';if(z>2.4)return 'deck';if(z>0)return 'balcony';if(z>-6)return x>2?'kitchen':'living';if(x<-2&&z>-11)return 'kids';return 'living';}
 var ROOMNAME={kitchen:'Kitchen',living:'Living room',kids:'Children\'s room: the family bed',balcony:'Balcony',deck:'Landing deck: the Velvet Orbit',vault:'The secret room'};
@@ -1245,8 +1298,9 @@ $('cClose').onclick=function(){hide($('card'));canvas.focus();};
 var pl=$('places');pl.innerHTML='<p>Jump to a room</p>'+PLACES.map(function(p,i){return '<button class="pl" type="button" data-i="'+i+'">'+p[0]+'<small>'+p[1]+'</small></button>';}).join('');
 pl.querySelectorAll('button.pl').forEach(function(b){b.onclick=function(){var p=PLACES[+b.dataset.i];rig.position.set(p[2],0,p[3]);yaw=p[4];pitch=-0.05;hide(pl);canvas.focus();};});
 $('bPlaces').onclick=function(){hide($('help'));hide($('card'));pl.classList.toggle('hide');};
-$('help').innerHTML='<p>'+(isTouch?'Drag on the left half to walk, drag on the right half to look. Tap anything with a small light, or the white button, to read its piece of the story.':'W A S D or arrows to walk, Shift to go faster. Click the picture to look with the mouse, Esc to let go, or drag to look. E or a click opens anything with a small light.')+'</p><p>The evening runs on its own: the kids race through the flat, then Mary does check-in on the family bed, brushing Zip\'s hair while they both shout "Mommy, look!" Head to the children\'s room to catch it.</p><p>If you hear nothing on an iPhone, flip the silent switch.</p>';
+$('help').innerHTML='<p>'+(isTouch?'Drag on the left half to walk, drag on the right half to look. Tap anything with a small light, or the white button, to read its piece of the story.':'W A S D or arrows to walk, Shift to go faster. Click the picture to look with the mouse, Esc to let go, or drag to look. E or a click opens anything with a small light.')+'</p><p>The evening runs on its own: the kids race through the flat, then Mary does check-in on the family bed, combing Gray\'s hair while they both shout "Mommy, look!" Head to the children\'s room to catch it, or press Hair combing to jump straight there.</p><p>If you hear nothing on an iPhone, flip the silent switch.</p>';
 $('bHelp').onclick=function(){hide(pl);hide($('card'));$('help').classList.toggle('hide');};
+if($('bComb'))$('bComb').onclick=function(){hide(pl);hide($('help'));hide($('card'));jumpTo(Math.max(0,C0-0.5));var vx=COMBVIEW[0],vz=COMBVIEW[1];rig.position.set(vx,rig.position.y,vz);yaw=Math.atan2(-(-5.0-vx),-(-7.45-vz));pitch=COMBVIEW[2];};
 if($('bBed'))$('bBed').onclick=function(){hide(pl);hide($('help'));hide($('card'));jumpTo(Math.max(0,N0-1));var vx=-2.5,vz=-6.55;rig.position.set(vx,rig.position.y,vz);yaw=Math.atan2(-(-5.2-vx),-(-8.9-vz));pitch=-0.2;};
 $('bStory').onclick=function(){if(document.pointerLockElement)document.exitPointerLock();show($('story'));};
 /* the story shelf reader */
