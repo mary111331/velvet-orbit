@@ -1021,7 +1021,7 @@ var mWalk=plen(MARY_PATH)/1.15;
 var PI=Math.PI,MSPOT=[TX,TZ-0.82],MSEAT=[5.5,-2.65];
 var tGray=new Track();laps(tGray,3);tGray.move(TO_BED.concat([[GCOMB[0],GCOMB[1]]]),1.4,'walk').hold(C1+(plen([[-6.0,-8.3],[-5.6,-7.3],[-5.0,-6.6],[-5.0,-5.6],[-5.1,-4.7]])-plen([GCOMB,[-5.0,-6.6],[-5.0,-5.6],[-5.1,-4.7]]))/1.3,GCOMB[0],GCOMB[1],0,'stand').move([GCOMB,[-5.0,-6.6],[-5.0,-5.6],[-5.1,-4.7]],1.3,'run');laps(tGray,2);
 var N0=tGray.t; /* bedtime */
-var ZTB=TO_BED.concat([[-5.6,-7.3],[-6.0,-8.3]]),ZARR=1.1+3*loopLen/(2.1*0.7)+plen(ZTB)/1.3;var tZip=new Track();tZip.hold(Math.max(1.1,ZARR-2*loopLen/ZSPD-plen(ZTB)/1.0),-5.1,-4.7,PI/2,'stand');laps(tZip,2,ZSPD);tZip.move(ZTB,1.0,'walk').hold(C1-(plen([[-6.0,-8.3],[-5.6,-7.3],[-5.0,-6.6],[-5.0,-5.6],[-5.1,-4.7]])-plen([[-5.0,-7.1],[-5.0,-6.6],[-5.0,-5.6],[-5.1,-4.7]]))/1.15,-6.0,-8.3,0.7,'kneel',0.4).move([[-6.0,-8.3],[-5.6,-7.3],[-5.0,-6.6],[-5.0,-5.6],[-5.1,-4.7]],1.15,'run');laps(tZip,1,ZSPD);
+var ZTB=TO_BED.concat([[-5.6,-7.3],[-6.0,-8.3]]),ZARR=1.1+3*loopLen/(2.1*0.7)+plen(ZTB)/1.3;var tZip=new Track();tZip.hold(Math.max(1.1,ZARR-2*loopLen/ZSPD-plen(ZTB)/1.0),-5.1,-4.7,PI/2,'stand');laps(tZip,2,ZSPD);tZip.move(ZTB,1.0,'walk').hold(C1-(plen([[-6.0,-8.3],[-5.6,-7.3],[-5.0,-6.6],[-5.0,-5.6],[-5.1,-4.7]])-plen([[-5.0,-7.1],[-5.0,-6.6],[-5.0,-5.6],[-5.1,-4.7]]))/1.15,-6.0,-8.3,0.7,'kneel',0.4).move([[-6.0,-8.3],[-5.6,-7.3],[-5.0,-6.6],[-5.0,-5.6],[-5.1,-4.7]],1.15,'run');laps(tZip,1,ZSPD);(function(){var R=N0+0.6-tZip.t-1.0,OUT=[[-5.1,-4.7],[-1.2,-4.9],[1.0,-3.6],[2.9,-3.6]];for(var k=OUT.length;k>=2;k--){var w=OUT.slice(0,k),L2=2*plen(w);if(L2/0.6<=R){var spd=Math.min(0.95,Math.max(0.6,L2/R));tZip.move(w,spd,'walk').move(w.slice().reverse(),spd,'walk');break;}}})();
 var tMary=new Track();tMary.hold(C0-mWalk-0.5,MSEAT[0],MSEAT[1],-PI/2,'sit',0.47,'butter').move(MARY_PATH,1.15).hold(C1+0.6,-5.0,-7.8,0,'sit',0.42).move(MARY_PATH.slice().reverse(),1.15);
 
 /* Miles by day: bread, the pot on the stove, the dishes, plates to the table, round again */
@@ -1183,14 +1183,21 @@ function poseP(P,st,t,ph){var o=P.o;var L0=P.legs[0],L1=P.legs[1],A0=P.arms[0],A
   else if(pers==='gray'&&P.headIn){P.headIn.rotation.y=Math.sin(t*0.9+ph)*0.18;}
   else if(pers==='miles'&&P.spine){P.spine.rotation.z=Math.sin(t*sp+ph)*0.03+0.02;}}
  else if(st.pose==='sit'){L0.hip.rotation.x=L1.hip.rotation.x=-PI/2;L0.knee.rotation.x=L1.knee.rotation.x=PI/2;y=st.y-P.hipY+0.04;A0.rotation.x=A1.rotation.x=-0.5;P.elbows[0].rotation.x=P.elbows[1].rotation.x=-0.3;y+=Math.sin(t*1.4+ph)*0.004;}
- else if(st.pose==='kneel'){L0.knee.rotation.x=L1.knee.rotation.x=PI/2;y=st.y-o.leg*0.5+0.05;}
+ else if(st.pose==='kneel'){L0.knee.rotation.x=L1.knee.rotation.x=PI/2;y=st.y-o.leg*0.5+0.05;
+  if(pers==='zip'){/* slow old robot, waiting his turn: looks around the room, sways, hands on his knees, now and then taps his antenna */
+   var zc=((t+ph*3)%9+9)%9,tap=zc<2.4?Math.sin(zc/2.4*PI):0;
+   P.head.rotation.y=Math.sin(t*0.42+ph)*0.5;P.head.rotation.x=Math.sin(t*0.3+ph)*0.08;if(P.headIn)P.headIn.rotation.z=Math.sin(t*0.55+ph)*0.09;
+   if(P.spine){P.spine.rotation.z=Math.sin(t*0.5+ph)*0.06;P.spine.rotation.x=0.05+Math.sin(t*0.33+ph)*0.05;}
+   y+=Math.sin(t*1.1+ph)*0.008;
+   A0.rotation.x=-0.55+Math.sin(t*0.7+ph)*0.22;A0.rotation.z=0.1;P.elbows[0].rotation.x=-0.6+Math.sin(t*0.9)*0.15;
+   A1.rotation.x=-0.55-Math.sin(t*0.6+ph+1)*0.2-tap*2.1;A1.rotation.z=-0.1-tap*0.25;P.elbows[1].rotation.x=-0.6-tap*0.9;}}
  else if(st.pose==='lie'){var a=ease(Math.min(st.since,st.left)/0.7);lx=-a*PI/2;y=st.y+a*o.td*0.5;y+=a*Math.sin(t*1.1+ph)*0.004;}
  else{A0.rotation.z=0.06;A1.rotation.z=-0.06;P.elbows[0].rotation.x=P.elbows[1].rotation.x=-0.12;y+=Math.sin(t*1.6+ph)*0.006;P.head.rotation.y=Math.sin(t*0.37+ph*2)*0.12;
   /* each of them stands still in their own way */
   if(pers==='miles'){P.spine.rotation.z=0.04+Math.sin(t*0.7+ph)*0.025;P.headIn.rotation.z=-0.07+Math.sin(t*0.5)*0.03;A1.rotation.x=0.12;A1.rotation.z=-0.12;P.elbows[1].rotation.x=-0.35;L1.hip.rotation.x=0.06;L1.knee.rotation.x=0.12;}
   else if(pers==='mary'){P.headIn.rotation.x=-0.06;P.headIn.rotation.z=Math.sin(t*0.45+ph)*0.04;A0.rotation.z=0.14;}
   else if(pers==='gray'){P.headIn.rotation.z=Math.sin(t*0.8+ph)*0.16;P.headIn.rotation.x=0.06+Math.sin(t*0.6)*0.05;P.head.rotation.y=Math.sin(t*0.55+ph*2)*0.32;}
-  else if(pers==='zip'){y+=Math.abs(Math.sin(t*1.4+ph))*0.006;P.spine.rotation.z=Math.sin(t*0.8+ph)*0.03;P.headIn.rotation.z=Math.sin(t*0.7+ph+0.8)*0.04;A0.rotation.z=0.12+Math.sin(t*1.4)*0.03;A1.rotation.z=-0.12-Math.sin(t*1.4)*0.03;}}
+  else if(pers==='zip'){var zc=((t+ph*3)%9+9)%9,tap=zc<2.4?Math.sin(zc/2.4*PI):0;y+=Math.abs(Math.sin(t*1.2+ph))*0.012;P.head.rotation.y=Math.sin(t*0.4+ph)*0.42;P.spine.rotation.z=Math.sin(t*0.5+ph)*0.06;P.headIn.rotation.z=Math.sin(t*0.6+ph+0.8)*0.08;L0.hip.rotation.x=Math.max(0,Math.sin(t*0.5+ph))*0.1;L0.knee.rotation.x=Math.max(0,Math.sin(t*0.5+ph))*0.2;A0.rotation.x=Math.sin(t*0.6+ph)*0.18;A0.rotation.z=0.12+Math.sin(t*1.0)*0.05;A1.rotation.x=-Math.sin(t*0.6+ph)*0.18-tap*2.6;A1.rotation.z=-0.12-Math.sin(t*1.0)*0.05-tap*0.2;P.elbows[1].rotation.x=-0.12-tap*0.9;}}
  var skv=st.pose!=='sit'&&st.pose!=='lie';P.skirts.forEach(function(m){m.visible=skv;});
  P.g.position.set(st.x,y,st.z);P.g.rotation.y=st.rot;P.g.rotation.x=lx;}
 var HUGP={ml:0.2,mh:0.36,ax:0.2,ae:-0.7,az:1.0,tw:0.7,lz:0.04,kz:0.1,nx:-0.7,ne:-1.5,nz:0.1,ny:0.9,fx:-1.1,fe:-0.8,fz:0.2,fy:0.9,hy:0.3,ky:0.4,mx:0.16,yx:-0.12};if(location.hash.indexOf('dbg')>=0)window.__HUGP=HUGP;
